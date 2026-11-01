@@ -1,3 +1,5 @@
+> **Uso interno:** o BenchTrack exige login para acessar suas funcionalidades. As credenciais de acesso são exclusivas do criador do aplicativo.
+
 <div align="center">
   <img src="assets/branding/benchtrack_logo.png" alt="BenchTrack" width="280">
 
