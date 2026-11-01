@@ -1,453 +1,139 @@
-# 🖥️ BenchTrack
+<div align="center">
+  <img src="assets/branding/benchtrack_logo.png" alt="BenchTrack" width="280">
 
-> Sistema multiplataforma para gerenciamento, acompanhamento e validação de Workstations.
+# BenchTrack
 
-O **BenchTrack** é uma aplicação desenvolvida em **Flutter** para organizar o fluxo de montagem e testes de Workstations, permitindo cadastrar equipamentos, acompanhar testes de estabilidade, registrar ocorrências, anexar arquivos e controlar o resultado final de cada máquina.
+Gerenciamento de montagem, acompanhamento de testes e aprovação de workstations.
 
-O projeto utiliza **Supabase** como backend, proporcionando autenticação, persistência dos dados e armazenamento de arquivos.
+[![Validação](https://github.com/AdneyCorrea/BenchTrack/actions/workflows/ci.yml/badge.svg)](https://github.com/AdneyCorrea/BenchTrack/actions/workflows/ci.yml)
+[![Última versão](https://img.shields.io/github/v/release/AdneyCorrea/BenchTrack)](https://github.com/AdneyCorrea/BenchTrack/releases/latest)
 
----
+[Baixar](#baixar-e-instalar) · [Funcionalidades](#funcionalidades) · [Desenvolvimento](docs/DEVELOPMENT.md) · [Distribuição](docs/DISTRIBUTION.md)
 
-## ✨ Funcionalidades
+</div>
 
-### 🖥️ Gerenciamento de Workstations
-- Cadastro e visualização de Workstations
-- Consulta detalhada dos componentes
-- Busca de Workstations
-- Organização por status
-- Exclusão com confirmação
-- Persistência dos dados no Supabase
+O **BenchTrack** organiza o fluxo de trabalho de cada equipamento, do cadastro dos componentes ao resultado final dos testes. Desenvolvido em Flutter para Windows e Android, utiliza Supabase para autenticação, banco de dados e armazenamento de anexos.
 
-### 🧪 Teste de estabilidade de 48 horas
-- Início do teste de 48 horas
-- Cronômetro em tempo real
-- Persistência do horário de início
-- Contagem continua mesmo após fechar o aplicativo
-- Funcionamento no Windows e Android
-- Registro do resultado
-- Aprovação ou reprovação
-- Histórico dos testes
+## Baixar e instalar
 
-### ✅ Aprovação e reprovação
-Após finalizar um teste, a Workstation pode ser marcada como:
-- ✅ **Aprovada**
-- ❌ **Reprovada**
+**Para usar o aplicativo, não é necessário instalar Flutter, Dart, Git ou ferramentas de desenvolvimento.**
 
-As máquinas finalizadas são organizadas na área **Finalizados**, onde seu resultado é exibido.
+| Plataforma | Requisito | Download |
+|---|---|---|
+| Windows | Windows 10/11, 64 bits (x64) | [Baixar ZIP](https://github.com/AdneyCorrea/BenchTrack/releases/latest/download/BenchTrack-windows-x64.zip) |
+| Android | Android 7.0 ou superior | [Baixar APK](https://github.com/AdneyCorrea/BenchTrack/releases/latest/download/BenchTrack-android.apk) |
 
-### ⚠️ Ocorrências
-- Registro de ocorrências durante os testes
-- Tipo e descrição
-- Data e Workstation relacionada
-- Arquivos anexados
-- Exclusão de ocorrências
+Os links apontam para a versão publicada mais recente. Consulte também as [notas das versões](https://github.com/AdneyCorrea/BenchTrack/releases) e os [checksums SHA-256](https://github.com/AdneyCorrea/BenchTrack/releases/latest/download/SHA256SUMS.txt). Na página de Releases, os pacotes estão em **Assets**; os arquivos **Source code** contêm o código-fonte.
 
-### 📎 Arquivos
-- Seleção e upload de arquivos
-- Visualização dos arquivos associados
-- Armazenamento no Supabase Storage
-- Exclusão de arquivos
-
-### 📊 Dashboard
-O painel inicial apresenta dados reais obtidos do banco:
-- Workstations em montagem
-- Workstations em teste
-- Workstations aprovadas
-- Workstations reprovadas
-
-### 🔐 Autenticação
-- Login utilizando Supabase Auth
-- Sessão persistente
-- Logout
-
----
-
-## ☁️ Supabase
-
-O Supabase é utilizado como backend da aplicação.
-
-**Recursos utilizados:**
-- PostgreSQL
-- Supabase Auth
-- Supabase Storage
-- API do Supabase
-- Persistência de dados
-- Controle de acesso
-
-**Principais tabelas:**
-```text
-workstations
-stress_tests
-```
-
----
-
-## 📱 Plataformas
-
-| Plataforma | Status |
-|---|---|
-| 🪟 Windows | ✅ Funcionando |
-| 🤖 Android | ✅ Funcionando |
-
----
-
-## 🛠️ Tecnologias
-
-| Tecnologia | Utilização |
-|---|---|
-| **Flutter** | Desenvolvimento multiplataforma |
-| **Dart** | Linguagem principal |
-| **Supabase** | Backend |
-| **PostgreSQL** | Banco de dados |
-| **Supabase Auth** | Autenticação |
-| **Supabase Storage** | Armazenamento de arquivos |
-| **Git** | Controle de versão |
-| **GitHub** | Versionamento e documentação |
-
----
-
-## 📂 Estrutura do projeto
-
-```text
-benchtrack/
-├── android/
-├── ios/
-├── linux/
-├── macos/
-├── web/
-├── windows/
-├── assets/
-│   └── branding/
-├── lib/
-│   ├── models/
-│   ├── screens/
-│   ├── services/
-│   ├── theme/
-│   ├── widgets/
-│   ├── app.dart
-│   └── main.dart
-├── supabase/
-├── test/
-├── pubspec.yaml
-└── README.md
-```
-
----
-
-## 📥 Usar o aplicativo sem ferramentas de desenvolvimento
-
-Baixe os pacotes em [Releases](https://github.com/AdneyCorrea/BenchTrack/releases), na seção **Assets**. Os arquivos **Source code** são o código-fonte, não o aplicativo pronto.
-
-- [⬇️ Baixar para Windows x64](https://github.com/AdneyCorrea/BenchTrack/releases/latest/download/BenchTrack-windows-x64.zip)
-- [⬇️ Baixar para Android](https://github.com/AdneyCorrea/BenchTrack/releases/latest/download/BenchTrack-android.apk)
-
-Os links acima apontam para os pacotes da versão publicada mais recente. Para preparar novas versões, consulte o [guia de distribuição](docs/DISTRIBUTION.md).
-
-### Windows 10/11 x64
+### Windows
 
 1. Baixe `BenchTrack-windows-x64.zip`.
-2. Extraia **todo** o ZIP para uma pasta do computador.
-3. Abra `benchtrack.exe` dentro da pasta extraída.
+2. Extraia **todo o conteúdo** para uma pasta do computador.
+3. Abra `BenchTrack.exe` na pasta extraída.
 
-Mantenha as DLLs e a pasta `data` junto do executável. O pacote gerado pelo workflow inclui o runtime C++; o usuário não precisa instalar Flutter, Dart, Git ou Visual Studio.
+Mantenha as DLLs e a pasta `data` junto do executável. O runtime Visual C++ está incluído no pacote. O aplicativo é portátil: não há instalador ou atualização automática. Para atualizar, extraia a nova versão em outra pasta e atualize seu atalho.
+
+O executável ainda não possui certificado de assinatura de código; o Windows pode exibir um aviso de editor desconhecido.
 
 ### Android
 
 1. Baixe `BenchTrack-android.apk` no celular.
-2. Abra o arquivo e autorize o navegador ou gerenciador de arquivos a instalar esse APK, se solicitado.
-3. Instale e abra o BenchTrack.
+2. Abra o arquivo e, se solicitado, autorize o navegador ou gerenciador de arquivos a instalar esse APK.
+3. Conclua a instalação e abra o BenchTrack.
 
-Não é necessário instalar Android Studio, Flutter ou Java no celular. As atualizações precisam usar a mesma assinatura. Uma instalação antiga com chave de debug pode precisar ser desinstalada antes; isso remove sua sessão e os dados locais.
+Para atualizar, instale o novo APK sobre a versão anterior. A distribuição usa uma assinatura permanente; preserve essa assinatura nas próximas versões.
 
-### Acesso
+> **Migração do APK antigo:** se você instalou uma versão assinada com chave de depuração, desinstale-a antes de instalar a versão pública 1.0.0. Isso remove a sessão e os dados locais. Os registros persistidos no Supabase permanecem no servidor.
 
-É necessário ter internet e uma conta criada pelo administrador no Supabase usado pela compilação. A tela atual oferece login, sem cadastro de conta pelo aplicativo. O usuário final não precisa criar um projeto Supabase.
+### Primeiro acesso
 
----
+Conecte-se à internet e entre com a conta fornecida pelo administrador. O aplicativo não oferece cadastro de conta na tela de login. O usuário final não precisa criar um projeto Supabase.
 
-## 🛠️ Desenvolver pelo código-fonte
+## Funcionalidades
 
-### Requisitos
+| Área | Recursos |
+|---|---|
+| Workstations | Cadastro de equipamentos e componentes, busca, consulta por status e exclusão com confirmação. |
+| Testes de 48 horas | Registro do início, acompanhamento do tempo decorrido, histórico e resultado. |
+| Aprovação | Aprovação ou reprovação e organização dos equipamentos finalizados. |
+| Ocorrências | Registro de tipo, descrição, data e anexos associados ao equipamento. |
+| Arquivos | Seleção, upload, consulta e exclusão de anexos no Supabase Storage. |
+| Dashboard | Visão dos equipamentos em montagem, em teste, aprovados e reprovados. |
+| Autenticação | Login, sessão persistente e logout com Supabase Auth. |
 
-- **Flutter 3.44.0**, versão usada no workflow, ou versão compatível com o `pubspec.lock` (Flutter >=3.44.0 e Dart >=3.12.0). O Dart já acompanha o Flutter.
-- Git para clonar o repositório.
-- **Windows**: compilar no Windows com Visual Studio e a carga **Desenvolvimento para desktop com C++**. Visual Studio Code não substitui esse compilador.
-- **Android**: Android SDK e JDK 17. Android Studio facilita a instalação do SDK e do emulador. Para celular físico, ative a depuração USB e autorize o computador.
+O horário de início dos testes fica salvo, permitindo recalcular o tempo ao reabrir o aplicativo. O BenchTrack acompanha o processo e registra resultados; a contagem de tempo não executa uma carga de estresse no hardware com o aplicativo fechado.
 
-Referências: [instalar Flutter](https://docs.flutter.dev/install), [ambiente Windows](https://docs.flutter.dev/platform-integration/windows/setup) e [ambiente Android](https://docs.flutter.dev/platform-integration/android/setup).
-
-Confira o ambiente e resolva os itens da plataforma desejada:
-
-```powershell
-flutter --version
-flutter doctor -v
+```text
+Cadastro → Montagem → Teste de 48 horas → Aprovação ou reprovação → Finalizados
 ```
 
-Para Android, aceite as licenças:
+## Desenvolvimento
 
-```powershell
-flutter doctor --android-licenses
-```
-
-### Instalação
+Para modificar o código e executar em modo de desenvolvimento, siga o [guia de desenvolvimento](docs/DEVELOPMENT.md). Ele reúne os requisitos de Flutter, configuração do Supabase, execução por plataforma e soluções para problemas comuns.
 
 ```powershell
 git clone https://github.com/AdneyCorrea/BenchTrack.git
 cd BenchTrack
 flutter pub get --enforce-lockfile
-```
-
-### Supabase
-
-`lib/services/supabase_config.dart` já aponta para um projeto Supabase com URL e chave **publishable** públicas de cliente. Para usar a instância existente, basta uma conta autorizada.
-
-Para usar seu próprio backend:
-
-1. Crie um projeto Supabase.
-2. Revise e execute os scripts de `supabase/` no SQL Editor na ordem `01` a `06`.
-3. Crie os usuários em **Authentication > Users**.
-4. Substitua `url` e `publishableKey` no arquivo de configuração pelos valores do seu projeto. A validação atual aceita HTTPS e chave com prefixo `sb_publishable_`.
-5. Recompile o aplicativo para incorporar a configuração.
-
-Os scripts incluem tabelas, políticas e Storage. Revise as permissões: as políticas atuais dão acesso a usuários autenticados e não isolam empresas. Nunca inclua chaves `service_role`, secret keys ou senhas administrativas no cliente.
-
-### Executar no Windows
-
-```powershell
-flutter devices
 flutter run -d windows
 ```
 
-### Executar no Android
+O exemplo pressupõe o ambiente Windows configurado conforme o guia. O projeto usa Flutter **3.44.0** no CI; o Dart acompanha o Flutter. Para Android, selecione o dispositivo com `flutter devices` e execute `flutter run -d ID_DO_DISPOSITIVO`.
 
-Conecte o celular ou inicie um emulador no Device Manager do Android Studio. Substitua `ID_DO_DISPOSITIVO` pelo ID Android listado:
-
-```powershell
-flutter devices
-flutter run -d ID_DO_DISPOSITIVO
-```
-
-### Problemas comuns
-
-| Sintoma | Solução |
-|---|---|
-| `flutter` não reconhecido | Adicione o `bin` do Flutter ao PATH e reabra o terminal. |
-| Dependências exigem Dart/Flutter mais novo | Use a versão indicada acima; Dart acompanha Flutter. |
-| Windows indisponível | Execute `flutter config --enable-windows-desktop` e confira a carga C++ no `flutter doctor -v`. |
-| Android não aparece | Confira emulador, cabo, driver, depuração USB e autorização no celular. |
-| Login ou consultas falham | Confira internet, conta, configuração Supabase, scripts e políticas RLS/Storage. |
-| APK release falha na assinatura | Configure `android/key.properties` seguindo o guia de distribuição. |
-
-Se houver resíduos de uma compilação anterior após mudar o SDK:
-
-```powershell
-flutter clean
-flutter pub get --enforce-lockfile
-```
-
----
-
-## 📦 Gerar pacotes
-
-O workflow [Gerar aplicativos](.github/workflows/build.yml) compila Windows e Android no GitHub Actions. A execução manual gera artifacts para download; tags `v*` também criam uma Release **em rascunho**, com ZIP, APK e checksums para testar antes de publicar.
-
-O [guia de distribuição](docs/DISTRIBUTION.md) explica a configuração inicial da assinatura Android, a compilação local e a publicação. O ZIP Windows é portátil; ainda não há instalador ou atualização automática.
-
-Referências oficiais: [distribuição Windows](https://docs.flutter.dev/platform-integration/windows/building) e [release Android](https://docs.flutter.dev/deployment/android).
-
----
-## 🎨 Identidade visual
-
-O BenchTrack possui uma identidade visual própria inspirada no estilo tecnológico/gamer:
-
-- ⚫ Interface escura
-- 🔴 Vermelho como cor de destaque
-- 🖥️ Elementos relacionados a hardware
-- 🎮 Estética tecnológica
-- 🦅 Identidade visual personalizada
-- 📱 Interface adaptada para Android
-- 🪟 Interface adaptada para Windows
-
----
-
-## 🔄 Fluxo de dados
+### Estrutura
 
 ```text
-Flutter
-   │
-   ▼
-Services
-   │
-   ▼
-Supabase
-   │
-   ├── PostgreSQL
-   ├── Authentication
-   └── Storage
+BenchTrack/
+├── .github/workflows/   # Validação e geração de pacotes
+├── android/            # Projeto Android e assinatura
+├── windows/            # Projeto desktop Windows
+├── assets/branding/    # Identidade visual
+├── lib/
+│   ├── models/         # Modelos de dados
+│   ├── screens/        # Telas
+│   ├── services/       # Integração com Supabase
+│   ├── theme/          # Tema visual
+│   └── widgets/        # Componentes de interface
+├── supabase/           # Scripts SQL de configuração
+├── test/               # Testes Flutter
+├── scripts/            # Empacotamento Windows
+└── docs/               # Guias de desenvolvimento e distribuição
 ```
 
----
+O repositório também contém scaffolds para outras plataformas Flutter. Os pacotes distribuídos atualmente são para Windows e Android.
 
-## 🧠 Conceitos aplicados
+### Tecnologias e dados
 
-- Desenvolvimento multiplataforma
-- Programação em Dart
-- Desenvolvimento de interfaces
-- Gerenciamento de estado
-- Persistência de dados
-- Banco de dados relacional
-- APIs
-- Autenticação
-- Armazenamento em nuvem
-- CRUD
-- Controle de sessão
-- Validação de dados
-- Tratamento de erros
-- Integração com serviços externos
-- Controle de versão com Git
+- **Flutter e Dart:** interface e lógica do aplicativo.
+- **Supabase Auth:** autenticação e sessão.
+- **PostgreSQL:** workstations, testes, ocorrências e metadados de anexos.
+- **Supabase Storage:** armazenamento de arquivos.
+- **GitHub Actions:** análise, testes e geração de pacotes.
 
----
+### Segurança
 
-## 🔒 Segurança
+A configuração do cliente fica em `lib/services/supabase_config.dart`, com URL e chave pública `publishable`. O controle de acesso depende das políticas RLS e das permissões do Storage. As políticas atuais permitem acesso a usuários autenticados e precisam ser revisadas para usos que exijam isolamento por empresa.
 
-Como o projeto utiliza Supabase, é importante configurar corretamente:
+Nunca inclua chaves administrativas, `service_role`, senhas ou arquivos de assinatura no repositório. As instruções para configurar seu próprio backend estão no [guia de desenvolvimento](docs/DEVELOPMENT.md#supabase).
 
-- Row Level Security (RLS)
-- Políticas de acesso
-- Permissões do Storage
-- Autenticação
-- Chaves públicas e privadas
-- Permissões das tabelas
+## Publicar novas versões
 
-Nunca coloque informações como:
+O [guia de distribuição](docs/DISTRIBUTION.md) explica assinatura Android, geração do ZIP Windows, artifacts do GitHub Actions e publicação de Releases.
 
-```text
-senha
-service_role key
-tokens privados
-credenciais administrativas
-```
+A validação do código acontece em pushes na `main` e pull requests. A geração dos aplicativos é um workflow separado, acionado manualmente ou por tags `v*`. Uma tag que já tenha Release publicada é preservada, sem substituir seus arquivos.
 
-diretamente no código público.
+## Próximos passos
 
----
+- Relatórios e exportação de dados.
+- Notificações e histórico avançado.
+- Permissões por usuário.
+- Instalador Windows e atualização automática.
+- Publicação em lojas de aplicativos.
 
-## 📌 Status do projeto
+Sugestões e problemas podem ser registrados em [Issues](https://github.com/AdneyCorrea/BenchTrack/issues). Ao relatar um erro, informe a plataforma, a versão do aplicativo e os passos para reproduzi-lo.
 
-🟢 **Em desenvolvimento ativo**
+## Autor e uso
 
-### Funcionalidades concluídas
+Desenvolvido por [Adney Correa](https://github.com/AdneyCorrea), estudante de Engenharia de Software, como projeto prático de aplicações multiplataforma, persistência de dados e acompanhamento de workstations.
 
-- [x] Cadastro de Workstations
-- [x] Dashboard
-- [x] Busca de Workstations
-- [x] Autenticação
-- [x] Login persistente
-- [x] Persistência de dados
-- [x] Integração com Supabase
-- [x] Teste de estabilidade de 48 horas
-- [x] Cronômetro persistente
-- [x] Teste funcionando com aplicativo fechado
-- [x] Aprovação de Workstations
-- [x] Reprovação de Workstations
-- [x] Área de finalizados
-- [x] Histórico de testes
-- [x] Registro de ocorrências
-- [x] Exclusão de ocorrências
-- [x] Upload de arquivos
-- [x] Exclusão de arquivos
-- [x] Exclusão de Workstations
-- [x] Confirmação de exclusão
-- [x] Funcionamento no Windows
-- [x] Funcionamento no Android
-- [x] Identidade visual personalizada
-- [x] Logo personalizada
-- [x] Ícones personalizados
-
----
-
-## 🔮 Possíveis melhorias futuras
-
-- [ ] Relatórios de testes
-- [ ] Exportação de dados
-- [ ] Histórico avançado
-- [ ] Notificações
-- [ ] Monitoramento adicional de hardware
-- [ ] Métricas avançadas de benchmark
-- [ ] Sistema de permissões por usuário
-- [ ] Melhorias adicionais na interface
-- [ ] Distribuição oficial para Android
-- [ ] Instalador para Windows
-
----
-
-## 🎯 Objetivo profissional
-
-O BenchTrack também funciona como um projeto prático para aplicação de conhecimentos de Engenharia de Software.
-
-O projeto envolve construção de interfaces, banco de dados, autenticação, armazenamento em nuvem e desenvolvimento multiplataforma.
-
-```text
-Flutter
-   +
-Dart
-   +
-Supabase
-   +
-PostgreSQL
-   +
-Authentication
-   +
-Storage
-   +
-Git/GitHub
-   +
-Engenharia de Software
-```
-
----
-
-## 👨‍💻 Autor
-
-**Adney Correa**
-
-Estudante de Engenharia de Software com experiência prática em:
-
-- Suporte técnico
-- Hardware
-- Montagem e diagnóstico de computadores
-- Desenvolvimento de aplicações
-- Automação de processos
-- Flutter
-- Dart
-- Banco de dados
-- Integração com APIs
-- Inteligência Artificial e Prompt Engineering
-
----
-
-## 📄 Licença
-
-Este projeto foi desenvolvido para fins de estudo, desenvolvimento e demonstração de conhecimentos em Engenharia de Software.
-
-Consulte os termos definidos pelo autor antes de utilizar, modificar ou redistribuir o código comercialmente.
-
----
-
-## ⭐ BenchTrack
-
-**Organizando Workstations. Simplificando testes.**
-
-```text
-🖥️ Cadastro
-      ↓
-🔧 Montagem
-      ↓
-🧪 48h de estabilidade
-      ↓
-✅ Aprovado / ❌ Reprovado
-      ↓
-📁 Finalizados
-```
-
-⭐ Se você gostou do projeto, considere deixar uma estrela no repositório!
+Este repositório não possui uma licença de software definida. Consulte o autor antes de utilizar, modificar ou redistribuir o código comercialmente.

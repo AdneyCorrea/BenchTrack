@@ -12,8 +12,40 @@ env:
   FLUTTER_VERSION: '3.44.0'
 
 jobs:
+  prepare:
+    name: Conferir distribuição
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.release.outputs.build }}
+    steps:
+      - name: Preservar versões já publicadas
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          REF_TYPE: ${{ github.ref_type }}
+          TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          if [ "$REF_TYPE" = tag ]; then
+            if gh api "repos/$REPOSITORY/releases/tags/$TAG" > release.json 2> api-error.txt; then
+              if [ "$(jq -r .draft release.json)" = false ]; then
+                echo 'build=false' >> "$GITHUB_OUTPUT"
+                echo 'Release já publicada: arquivos preservados.' >> "$GITHUB_STEP_SUMMARY"
+                exit 0
+              fi
+            elif ! grep -q 'HTTP 404' api-error.txt; then
+              cat api-error.txt >&2
+              exit 1
+            fi
+          fi
+          echo 'build=true' >> "$GITHUB_OUTPUT"
+
   windows:
+    needs: prepare
+    if: needs.prepare.outputs.build == 'true'
     runs-on: windows-2022
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -34,7 +66,10 @@ jobs:
           if-no-files-found: error
 
   android:
+    needs: prepare
+    if: needs.prepare.outputs.build == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
