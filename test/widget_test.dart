@@ -1,30 +1,22 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:benchtrack/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:benchtrack/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Login exige credenciais antes de autenticar', (tester) async {
+    var loggedIn = false;
+    await tester.pumpWidget(MaterialApp(
+      home: LoginScreen(onLoggedIn: () => loggedIn = true),
+    ));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    final submit = find.widgetWithText(FilledButton, 'Entrar');
+    await tester.ensureVisible(submit);
+    await tester.tap(submit);
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Informe o e-mail'), findsOneWidget);
+    expect(find.text('Informe a senha'), findsOneWidget);
+    expect(loggedIn, isFalse);
+    expect(tester.takeException(), isNull);
   });
 }

@@ -134,126 +134,125 @@ benchtrack/
 
 ---
 
-## ⚙️ Requisitos
+## 📥 Usar o aplicativo sem ferramentas de desenvolvimento
 
-Para executar o projeto localmente:
+Baixe os pacotes em [Releases](https://github.com/AdneyCorrea/BenchTrack/releases), na seção **Assets**. Os arquivos **Source code** são o código-fonte, não o aplicativo pronto.
 
-- Flutter
-- Dart
-- Android Studio para desenvolvimento Android
-- Visual Studio com desenvolvimento Desktop em C++ para Windows
-- Projeto configurado no Supabase
-- Git
+> Se ainda não houver ZIP/APK publicado, o mantenedor precisa gerar e publicar a primeira versão seguindo o [guia de distribuição](docs/DISTRIBUTION.md).
 
-Verifique o ambiente:
+### Windows 10/11 x64
 
-```bash
-flutter doctor
-```
+1. Baixe `BenchTrack-windows-x64.zip`.
+2. Extraia **todo** o ZIP para uma pasta do computador.
+3. Abra `benchtrack.exe` dentro da pasta extraída.
 
----
-
-## 🚀 Instalação
-
-Clone o repositório:
-
-```bash
-git clone https://github.com/SEU-USUARIO/benchtrack.git
-```
-
-Entre no diretório:
-
-```bash
-cd benchtrack
-```
-
-Instale as dependências:
-
-```bash
-flutter pub get
-```
-
----
-
-## 🔑 Configuração do Supabase
-
-Configure as credenciais do seu projeto Supabase conforme a estrutura existente em:
-
-```text
-lib/services/supabase_config.dart
-```
-
-> ⚠️ **Nunca publique senhas, tokens privados ou credenciais administrativas no GitHub.**
-
-Configure também corretamente as políticas de segurança (RLS) e permissões do Storage.
-
----
-
-## ▶️ Executando
-
-### Windows
-
-```bash
-flutter devices
-flutter run -d windows
-```
+Mantenha as DLLs e a pasta `data` junto do executável. O pacote gerado pelo workflow inclui o runtime C++; o usuário não precisa instalar Flutter, Dart, Git ou Visual Studio.
 
 ### Android
 
-Conecte um dispositivo ou inicialize um emulador:
+1. Baixe `BenchTrack-android.apk` no celular.
+2. Abra o arquivo e autorize o navegador ou gerenciador de arquivos a instalar esse APK, se solicitado.
+3. Instale e abra o BenchTrack.
 
-```bash
-flutter devices
-flutter run
-```
+Não é necessário instalar Android Studio, Flutter ou Java no celular. As atualizações precisam usar a mesma assinatura. Uma instalação antiga com chave de debug pode precisar ser desinstalada antes; isso remove sua sessão e os dados locais.
+
+### Acesso
+
+É necessário ter internet e uma conta criada pelo administrador no Supabase usado pela compilação. A tela atual oferece login, sem cadastro de conta pelo aplicativo. O usuário final não precisa criar um projeto Supabase.
 
 ---
 
-## 🧹 Limpeza
+## 🛠️ Desenvolver pelo código-fonte
 
-Caso seja necessário reconstruir o projeto:
+### Requisitos
 
-```bash
-flutter clean
-flutter pub get
+- **Flutter 3.44.0**, versão usada no workflow, ou versão compatível com o `pubspec.lock` (Flutter >=3.44.0 e Dart >=3.12.0). O Dart já acompanha o Flutter.
+- Git para clonar o repositório.
+- **Windows**: compilar no Windows com Visual Studio e a carga **Desenvolvimento para desktop com C++**. Visual Studio Code não substitui esse compilador.
+- **Android**: Android SDK e JDK 17. Android Studio facilita a instalação do SDK e do emulador. Para celular físico, ative a depuração USB e autorize o computador.
+
+Referências: [instalar Flutter](https://docs.flutter.dev/install), [ambiente Windows](https://docs.flutter.dev/platform-integration/windows/setup) e [ambiente Android](https://docs.flutter.dev/platform-integration/android/setup).
+
+Confira o ambiente e resolva os itens da plataforma desejada:
+
+```powershell
+flutter --version
+flutter doctor -v
 ```
 
-Depois execute novamente:
+Para Android, aceite as licenças:
 
-```bash
+```powershell
+flutter doctor --android-licenses
+```
+
+### Instalação
+
+```powershell
+git clone https://github.com/AdneyCorrea/BenchTrack.git
+cd BenchTrack
+flutter pub get --enforce-lockfile
+```
+
+### Supabase
+
+`lib/services/supabase_config.dart` já aponta para um projeto Supabase com URL e chave **publishable** públicas de cliente. Para usar a instância existente, basta uma conta autorizada.
+
+Para usar seu próprio backend:
+
+1. Crie um projeto Supabase.
+2. Revise e execute os scripts de `supabase/` no SQL Editor na ordem `01` a `06`.
+3. Crie os usuários em **Authentication > Users**.
+4. Substitua `url` e `publishableKey` no arquivo de configuração pelos valores do seu projeto. A validação atual aceita HTTPS e chave com prefixo `sb_publishable_`.
+5. Recompile o aplicativo para incorporar a configuração.
+
+Os scripts incluem tabelas, políticas e Storage. Revise as permissões: as políticas atuais dão acesso a usuários autenticados e não isolam empresas. Nunca inclua chaves `service_role`, secret keys ou senhas administrativas no cliente.
+
+### Executar no Windows
+
+```powershell
+flutter devices
 flutter run -d windows
 ```
 
-ou:
+### Executar no Android
 
-```bash
-flutter run
+Conecte o celular ou inicie um emulador no Device Manager do Android Studio. Substitua `ID_DO_DISPOSITIVO` pelo ID Android listado:
+
+```powershell
+flutter devices
+flutter run -d ID_DO_DISPOSITIVO
+```
+
+### Problemas comuns
+
+| Sintoma | Solução |
+|---|---|
+| `flutter` não reconhecido | Adicione o `bin` do Flutter ao PATH e reabra o terminal. |
+| Dependências exigem Dart/Flutter mais novo | Use a versão indicada acima; Dart acompanha Flutter. |
+| Windows indisponível | Execute `flutter config --enable-windows-desktop` e confira a carga C++ no `flutter doctor -v`. |
+| Android não aparece | Confira emulador, cabo, driver, depuração USB e autorização no celular. |
+| Login ou consultas falham | Confira internet, conta, configuração Supabase, scripts e políticas RLS/Storage. |
+| APK release falha na assinatura | Configure `android/key.properties` seguindo o guia de distribuição. |
+
+Se houver resíduos de uma compilação anterior após mudar o SDK:
+
+```powershell
+flutter clean
+flutter pub get --enforce-lockfile
 ```
 
 ---
 
-## 📦 Build
+## 📦 Gerar pacotes
 
-### Windows
+O workflow [Gerar aplicativos](.github/workflows/build.yml) compila Windows e Android no GitHub Actions. A execução manual gera artifacts para download; tags `v*` também criam uma Release **em rascunho**, com ZIP, APK e checksums para testar antes de publicar.
 
-```bash
-flutter build windows
-```
+O [guia de distribuição](docs/DISTRIBUTION.md) explica a configuração inicial da assinatura Android, a compilação local e a publicação. O ZIP Windows é portátil; ainda não há instalador ou atualização automática.
 
-### Android APK
-
-```bash
-flutter build apk
-```
-
-O APK será gerado em:
-
-```text
-build/app/outputs/flutter-apk/
-```
+Referências oficiais: [distribuição Windows](https://docs.flutter.dev/platform-integration/windows/building) e [release Android](https://docs.flutter.dev/deployment/android).
 
 ---
-
 ## 🎨 Identidade visual
 
 O BenchTrack possui uma identidade visual própria inspirada no estilo tecnológico/gamer:
