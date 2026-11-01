@@ -138,7 +138,10 @@ benchtrack/
 
 Baixe os pacotes em [Releases](https://github.com/AdneyCorrea/BenchTrack/releases), na seção **Assets**. Os arquivos **Source code** são o código-fonte, não o aplicativo pronto.
 
-> Se ainda não houver ZIP/APK publicado, o mantenedor precisa gerar e publicar a primeira versão seguindo o [guia de distribuição](docs/DISTRIBUTION.md).
+- [⬇️ Baixar para Windows x64](https://github.com/AdneyCorrea/BenchTrack/releases/latest/download/BenchTrack-windows-x64.zip)
+- [⬇️ Baixar para Android](https://github.com/AdneyCorrea/BenchTrack/releases/latest/download/BenchTrack-android.apk)
+
+Os links acima apontam para os pacotes da versão publicada mais recente. Para preparar novas versões, consulte o [guia de distribuição](docs/DISTRIBUTION.md).
 
 ### Windows 10/11 x64
 
