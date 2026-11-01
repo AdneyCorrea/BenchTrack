@@ -5,7 +5,6 @@
 
 Gerenciamento de montagem, acompanhamento de testes e aprovação de workstations.
 
-[![Validação](https://github.com/AdneyCorrea/BenchTrack/actions/workflows/ci.yml/badge.svg)](https://github.com/AdneyCorrea/BenchTrack/actions/workflows/ci.yml)
 [![Última versão](https://img.shields.io/github/v/release/AdneyCorrea/BenchTrack)](https://github.com/AdneyCorrea/BenchTrack/releases/latest)
 
 [Baixar](#baixar-e-instalar) · [Funcionalidades](#funcionalidades) · [Desenvolvimento](docs/DEVELOPMENT.md) · [Distribuição](docs/DISTRIBUTION.md)
